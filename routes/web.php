@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* Practice */
+Route::any('/practice/{n?}', 'PracticeController@index');
+
 /* DB Test Route */
 Route::get('/debug', function () {
 
