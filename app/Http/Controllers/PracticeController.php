@@ -10,6 +10,15 @@ use App\Book;
 
 class PracticeController extends Controller
 {
+
+    public function practice12()
+    {
+        //$book = new Book();
+        $books = Book::where('author', '=', 'J.K. Rowling')->delete();
+
+        dump($books);
+    }
+
     /**
      *
      */
@@ -119,7 +128,7 @@ class PracticeController extends Controller
     {
         $data = ['foo' => 'bar'];
         Debugbar::info($data);
-        Debugbar::info('Current environment: '.App::environment());
+        Debugbar::info('Current environment: ' . App::environment());
         Debugbar::error('Error!');
         Debugbar::warning('Watch out…');
         Debugbar::addMessage('Another message', 'mylabel');
