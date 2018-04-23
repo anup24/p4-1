@@ -7,9 +7,31 @@ use Config;
 use App;
 use Debugbar;
 use App\Book;
+use Aws\Translate;
 
 class PracticeController extends Controller
 {
+
+    public function practice13()
+    {
+        $translate = new Translate\TranslateClient([
+            'version' => 'latest',
+            'region' => env('AWS_REGION'),
+            'credentials' => [
+                'key' => env('AWS_ACCESS_KEY_ID'),
+                'secret' => env('AWS_SECRET_ACCESS_KEY')
+            ]
+        ]);
+
+        $result = $translate->translateText([
+            'SourceLanguageCode' => 'en',
+            'TargetLanguageCode' => 'de',
+            'Text' => 'This is a test.'
+        ]);
+
+        dump($result);
+
+    }
 
     public function practice12()
     {
