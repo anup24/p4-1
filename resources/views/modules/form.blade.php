@@ -1,4 +1,5 @@
 <form method='POST' action='/translate'>
+    {{ csrf_field() }}
     <div class='form-group'>
         <label for='sourceLanguage'>Choose your starting language:</label>
         <select name='sourceLanguage' id='sourceLanguage' class='form-control'>

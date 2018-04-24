@@ -16,9 +16,17 @@ class TranslateController extends Controller
     {
         return view('translate.index');
     }
-    
+
     public function translate(Request $request)
     {
+        # To Do:
+        # - Validate request
+        # - Pre-populate form with old()
+        # - Use request fields in translate function
+        # - Add CSRF token
+
+
+
         $translate = new Translate\TranslateClient([
             'version' => 'latest',
             'region' => env('AWS_REGION'),
@@ -29,9 +37,9 @@ class TranslateController extends Controller
         ]);
 
         $result = $translate->translateText([
-            'SourceLanguageCode' => 'en',
-            'TargetLanguageCode' => 'de',
-            'Text' => 'This is a test.'
+            'SourceLanguageCode' => $request->input('sourceLanguage','en'),
+            'TargetLanguageCode' => $request->input('targetLanguage','es'),
+            'Text' => $request->input('translateText','Test post please ignore.')
         ]);
 
         dump($result);
