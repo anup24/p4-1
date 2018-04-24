@@ -10,9 +10,8 @@
 @endsection
 
 @section('content')
-    <h2>Babel: Translation</h2>
-
-
+    <h2>Babel: Translation Service</h2>
+    @include('modules.form')
 @endsection
 
 

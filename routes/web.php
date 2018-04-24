@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('translate.index');
-});
+Route::get('/', 'TranslateController@index');
+
+Route::post('/translate','TranslateController@translate');
 
 /* Practice */
 Route::any('/practice/{n?}', 'PracticeController@index');
