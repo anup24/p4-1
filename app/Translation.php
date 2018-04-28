@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Translation extends Model
 {
-    public function sourcelanguages()
+    public function sourcelanguage()
     {
         return $this->belongsTo('App\Sourcelanguage');
     }
 
-    public function targetlanguages()
+    public function targetlanguage()
     {
         return $this->belongsTo('App\Targetlanguage');
     }

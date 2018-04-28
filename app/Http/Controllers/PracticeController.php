@@ -7,10 +7,22 @@ use Config;
 use App;
 use Debugbar;
 use App\Book;
+use App\Translation;
 use Aws\Translate;
 
 class PracticeController extends Controller
 {
+
+    public function practice14()
+    {
+        $translation = Translation::first();
+        $srcLang = $translation->sourcelanguage->name;
+        $destLang = $translation->targetlanguage->name;
+
+        dump($translation);
+        dump($srcLang);
+        dump($destLang);
+    }
 
     public function practice13()
     {
