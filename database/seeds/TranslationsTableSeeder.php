@@ -13,8 +13,8 @@ class TranslationsTableSeeder extends Seeder
     public function run()
     {
         $translations = [
-            ['This is a test.', 'das ist ein Test.', 4],
-            ['This is a test.', 'c\'est un test', 1]
+            ['This is a test.', 'das ist ein Test.', 4, 5],
+            ['This is a test.', 'c\'est un test', 1, 4]
         ];
 
         $count = count($translations);
@@ -28,6 +28,7 @@ class TranslationsTableSeeder extends Seeder
             $translation->input = $data[0];
             $translation->output = $data[1];
             $translation->sourcelanguage_id = $data[2];
+            $translation->targetlanguage_id = $data[3];
 
             $translation->save();
             $count--;
