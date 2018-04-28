@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Sourcelanguage;
+use App\Targetlanguage;
 
-class SourcelanguagesTableSeeder extends Seeder
+class TargetlanguagesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,8 +12,7 @@ class SourcelanguagesTableSeeder extends Seeder
      */
     public function run()
     {
-        $sourceLanguages = [
-            ['Auto-Detect', 'auto'],
+        $targetLanguages = [
             ['Arabic', 'ar'],
             ['Chinese (Simplified)', 'zh'],
             ['English', 'en'],
@@ -23,10 +22,10 @@ class SourcelanguagesTableSeeder extends Seeder
             ['Spanish', 'es']
         ];
 
-        $count = count($sourceLanguages);
+        $count = count($targetLanguages);
 
-        foreach ($sourceLanguages as $key => $data) {
-            $language = new Sourcelanguage;
+        foreach ($targetLanguages as $key => $data) {
+            $language = new Targetlanguage;
 
             $language->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
             $language->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
