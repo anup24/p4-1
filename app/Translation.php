@@ -15,4 +15,9 @@ class Translation extends Model
     {
         return $this->belongsTo('App\Targetlanguage');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag')->withTimestamps();
+    }
 }
