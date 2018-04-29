@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Config;
 use App;
 use Debugbar;
-use App\Book;
+use App\Sourcelanguage;
+use App\Targetlanguage;
 use Aws\Translate;
 
 class TranslateController extends Controller
@@ -14,7 +15,14 @@ class TranslateController extends Controller
 
     public function index()
     {
-        return view('translate.index');
+        # Fetch languages and pass to index
+        $srcLang = Sourcelanguage::all();
+        $targetLang = Targetlanguage::all();
+
+        return view('translate.index')->with([
+            'srcLang' => $srcLang,
+            'targetLang' => $targetLang
+        ]);
     }
 
     public function translate(Request $request)
