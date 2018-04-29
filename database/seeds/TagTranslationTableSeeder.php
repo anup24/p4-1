@@ -13,6 +13,19 @@ class TagTranslationTableSeeder extends Seeder
      */
     public function run()
     {
-        // Write seeder to add tags to books
+        $translations = [
+            1 => ['Verified Accurate', 'Flag as Inappropriate'],
+            2 => ['Flag as Inaccurate', 'Flag as Inappropriate']
+        ];
+
+        foreach ($translations as $id => $tags) {
+            $translation = Translation::find($id);
+
+            foreach ($tags as $tagName) {
+                $tag = Tag::where('name', '=', $tagName)->first();
+
+                $translation->tags()->save($tag);
+            }
+        }
     }
 }

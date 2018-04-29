@@ -26,7 +26,7 @@ class TranslateController extends Controller
         # - Add CSRF token
 
 
-
+        # Create new AWS client
         $translate = new Translate\TranslateClient([
             'version' => 'latest',
             'region' => env('AWS_REGION'),
@@ -36,6 +36,7 @@ class TranslateController extends Controller
             ]
         ]);
 
+        # Attempt to fetch translation from form request input
         $result = $translate->translateText([
             'SourceLanguageCode' => $request->input('sourceLanguage','en'),
             'TargetLanguageCode' => $request->input('targetLanguage','es'),
