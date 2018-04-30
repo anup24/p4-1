@@ -20,4 +20,12 @@
             <input type='submit' value='Translate' class='btn btn-primary btn-md'>
         </div>
     </div>
+    <!-- Errors -->
+    @if(count($errors) > 0)
+        <ul class='alert alert-danger'>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
 </form>

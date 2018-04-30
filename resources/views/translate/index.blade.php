@@ -2,7 +2,7 @@
 
 @push('head')
     {{-- Custom CSS --}}
-    <link href='/css/p3_style.css' type='text/css' rel='stylesheet'>
+    <link href='/css/p4.css' type='text/css' rel='stylesheet'>
 @endpush
 
 @section('title')

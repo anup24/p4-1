@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Aws\Exception\AwsException;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Config;
 use App;
 use Debugbar;
@@ -28,11 +30,13 @@ class TranslateController extends Controller
     public function translate(Request $request)
     {
         # To Do:
-        # - Validate request
         # - Pre-populate form with old()
         # - Use request fields in translate function
-        # - Add CSRF token
 
+        # Validate text area input
+        $validatedText = $request->validate([
+            'translateText' => array('required', 'max:50')
+        ]);
 
         # Create new AWS client
         $translate = new Translate\TranslateClient([
@@ -45,13 +49,33 @@ class TranslateController extends Controller
         ]);
 
         # Attempt to fetch translation from form request input
-        $result = $translate->translateText([
-            'SourceLanguageCode' => $request->input('sourceLanguage','en'),
-            'TargetLanguageCode' => $request->input('targetLanguage','es'),
-            'Text' => $request->input('translateText','Test post please ignore.')
-        ]);
+        try {
+            $result = $translate->translateText([
+                'SourceLanguageCode' => $request->input('sourceLanguage', 'en'),
+                'TargetLanguageCode' => $request->input('targetLanguage', 'es'),
+                'Text' => $validatedText['translateText']
+            ]);
+        } catch (AwsException $e) {
+            $result = [
+                'errorCode' => $e->getAwsErrorCode(),
+                'errorMessage' => $e->getAwsErrorMessage()
+            ];
+        }
 
         dump($result);
+
+        # TO DO:
+        # - Save successful translation to the database in the controller
+        # - Pass saved DB entry to the output page
+        # - Otherwise use the error results
+        # - Buttons for "See all" or "Edit"
+        # - Edit adds additional flags
+        # Use old() on the form inputs
+
+        return view('translate.output')->with([
+            'input' => $validatedText['translateText'],
+            'result' => $result
+        ]);
 
     }
 

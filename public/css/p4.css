@@ -1,0 +1,76 @@
+#container {
+    text-align: center;
+    width: 60%;
+    padding-left: 0px;
+    margin-left: 20%;
+}
+
+#header {
+    text-align: center;
+}
+
+#intro {
+    margin-bottom: 30px;
+}
+
+#submit {
+    width: 100%;
+    text-align: center;
+}
+
+#checkbox {
+    margin-left:22px;
+}
+
+img {
+    margin: 20px 0px;
+}
+
+h1 {
+    margin-bottom: 50px;
+}
+
+label, legend {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.card {
+    width: 75%;
+    margin-left: 12.5%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.btn, .alert {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    text-align: left;
+    font-weight: bold;
+}
+
+.alert ul, li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.table-bordered {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+td,th {
+    padding: 10px;
+}
+
+h2 {
+    margin-top: 20px;
+}
