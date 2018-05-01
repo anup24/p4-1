@@ -30,10 +30,6 @@ class TranslateController extends Controller
 
     public function translate(Request $request)
     {
-        # To Do:
-        # - Pre-populate form with old()
-        # - Use request fields in translate function
-
         # Validate text area input
         $validatedText = $request->validate([
             'translateText' => array('required', 'max:50')
@@ -59,28 +55,28 @@ class TranslateController extends Controller
             ]);
 
             # Get language objects
-            $srcLangID = Sourcelanguage::where('short_name','=',$result['SourceLanguageCode'])->first();
-            $tarLangID = Targetlanguage::where('short_name','=',$result['TargetLanguageCode'])->first();
+            $srcLangID = Sourcelanguage::where('short_name', '=', $result['SourceLanguageCode'])->first();
+            $tarLangID = Targetlanguage::where('short_name', '=', $result['TargetLanguageCode'])->first();
 
             # Save result to database upon successful call
             $new_translation = new Translation();
             $new_translation->input = $validatedText['translateText'];
             $new_translation->output = $result['TranslatedText'];
+
             # Associate source and target language foreign keys
             $new_translation->sourceLanguage()->associate($srcLangID);
             $new_translation->targetLanguage()->associate($tarLangID);
             $new_translation->save();
 
-            dump($new_translation->toArray());
-
+            # Retrieve the newly saved entry to pass to view
+            $result = Translation::orderBy('id','desc')->first();
+            
         } catch (AwsException $e) {
             $result = [
                 'errorCode' => $e->getAwsErrorCode(),
                 'errorMessage' => $e->getAwsErrorMessage()
             ];
         }
-
-        dump($result);
 
         # TO DO:
         # - Pass saved DB entry to the output page (maybe redirect to /translations/{n})?
@@ -91,7 +87,6 @@ class TranslateController extends Controller
         # Use old() on the form inputs
 
         return view('translate.output')->with([
-            'input' => $validatedText['translateText'],
             'result' => $result
         ]);
 

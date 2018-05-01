@@ -19,21 +19,16 @@
             </tr>
             <tr>
                 <td colspan='2'>
-                    {{ $input }}
+                    {{ $result['input'] }}
                 </td>
                 <td colspan='2'>
-                    {{ $result['TranslatedText'] }}
+                    {{ $result['output'] }}
                 </td>
             </tr>
         </table>
-    @endif
-
-
-    {{-- Handle Exceptions from the AWS Client --}}
-    @if ($result['errorCode'])
+        {{-- Handle Exceptions from the AWS Client --}}
+    @else
         <h3>Error Code: {{ $result['errorCode'] }}</h3>
         <p>{{ $result['errorMessage'] }}</p>
     @endif
-
-
 @endsection

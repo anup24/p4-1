@@ -21,10 +21,6 @@
     @yield('content')
 </section>
 
-<footer>
-    &copy; {{ date('Y') }}
-</footer>
-
 @stack('body')
 
 </body>
