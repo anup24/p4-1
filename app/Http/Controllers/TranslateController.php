@@ -15,10 +15,9 @@ use Aws\Translate;
 
 class TranslateController extends Controller
 {
-
     public function index()
     {
-        # Fetch languages and pass to index
+        # Fetch languages to populate the selectors
         $srcLang = Sourcelanguage::all();
         $targetLang = Targetlanguage::all();
 
@@ -54,7 +53,7 @@ class TranslateController extends Controller
                 'Text' => $validatedText['translateText']
             ]);
 
-            # Get language objects
+            # Get language objects to associate with the new translation DB entry
             $srcLangID = Sourcelanguage::where('short_name', '=', $result['SourceLanguageCode'])->first();
             $tarLangID = Targetlanguage::where('short_name', '=', $result['TargetLanguageCode'])->first();
 
@@ -69,8 +68,11 @@ class TranslateController extends Controller
             $new_translation->save();
 
             # Retrieve the newly saved entry to pass to view
-            $result = Translation::orderBy('id','desc')->first();
-            
+            $result = Translation::orderBy('id', 'desc')->first();
+
+            # Land on the newly saved translation detail page
+            return redirect('/translations/' . $result['id']);
+
         } catch (AwsException $e) {
             $result = [
                 'errorCode' => $e->getAwsErrorCode(),
@@ -79,9 +81,9 @@ class TranslateController extends Controller
         }
 
         # TO DO:
-        # - Pass saved DB entry to the output page (maybe redirect to /translations/{n})?
-        # - Use the practice example to show all translations or a single one at /translations/{n}
-        # - Otherwise use the error results. Change output.blade to error.blade?
+        # - Set up /translations/{n?} view and Translations controller
+        # - Add Translations@show, @index, @edit, and @delete
+        # - Change output.blade to error.blade?
         # - Buttons for "See all" or "Edit"
         # - Edit adds additional flags
         # Use old() on the form inputs
