@@ -10,6 +10,7 @@ use App;
 use Debugbar;
 use App\Sourcelanguage;
 use App\Targetlanguage;
+use App\Translation;
 use Aws\Translate;
 
 class TranslateController extends Controller
@@ -50,11 +51,28 @@ class TranslateController extends Controller
 
         # Attempt to fetch translation from form request input
         try {
+            # Make call to AWS Translate
             $result = $translate->translateText([
                 'SourceLanguageCode' => $request->input('sourceLanguage', 'en'),
                 'TargetLanguageCode' => $request->input('targetLanguage', 'es'),
                 'Text' => $validatedText['translateText']
             ]);
+
+            # Get language objects
+            $srcLangID = Sourcelanguage::where('short_name','=',$result['SourceLanguageCode'])->first();
+            $tarLangID = Targetlanguage::where('short_name','=',$result['TargetLanguageCode'])->first();
+
+            # Save result to database upon successful call
+            $new_translation = new Translation();
+            $new_translation->input = $validatedText['translateText'];
+            $new_translation->output = $result['TranslatedText'];
+            # Associate source and target language foreign keys
+            $new_translation->sourceLanguage()->associate($srcLangID);
+            $new_translation->targetLanguage()->associate($tarLangID);
+            $new_translation->save();
+
+            dump($new_translation->toArray());
+
         } catch (AwsException $e) {
             $result = [
                 'errorCode' => $e->getAwsErrorCode(),
@@ -65,9 +83,9 @@ class TranslateController extends Controller
         dump($result);
 
         # TO DO:
-        # - Save successful translation to the database in the controller
-        # - Pass saved DB entry to the output page
-        # - Otherwise use the error results
+        # - Pass saved DB entry to the output page (maybe redirect to /translations/{n})?
+        # - Use the practice example to show all translations or a single one at /translations/{n}
+        # - Otherwise use the error results. Change output.blade to error.blade?
         # - Buttons for "See all" or "Edit"
         # - Edit adds additional flags
         # Use old() on the form inputs
