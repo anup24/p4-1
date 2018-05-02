@@ -49,6 +49,10 @@ label, legend {
     margin-bottom: 30px;
 }
 
+.entry {
+    margin: 15px 0px;
+}
+
 .form-group {
     text-align: left;
     font-weight: bold;
@@ -69,6 +73,10 @@ label, legend {
 
 td,th {
     padding: 10px;
+}
+
+td {
+    width: 50%;
 }
 
 h2 {
