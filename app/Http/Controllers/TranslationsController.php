@@ -29,12 +29,30 @@ class TranslationsController extends Controller
     public function show($id)
     {
         # Fetch entry from DB
-        $entry = Translation::where('id','=',$id)->first();
-        if(is_null($entry)) {
+        $entry = Translation::find($id);
+
+        # Check if anything returned
+        if (is_null($entry)) {
             return abort(404);
         }
 
-        return view('translations.show')-> with([
+        return view('translations.show')->with([
+            'entry' => $entry,
+            'enableButtons' => false
+        ]);
+    }
+
+    public function delete($id)
+    {
+        # Fetch entry from DB
+        $entry = Translation::find($id);
+
+        # Check if anything returned
+        if (is_null($entry)) {
+            return abort(404);
+        }
+
+        return view('translations.delete')->with([
             'entry' => $entry,
             'enableButtons' => false
         ]);

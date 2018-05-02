@@ -64,6 +64,10 @@ label, legend {
     padding: 0px;
 }
 
+#deleteEntry {
+    width: 50px;
+}
+
 .table-bordered {
     width: 100%;
     text-align: center;

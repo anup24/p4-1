@@ -9,6 +9,9 @@ Route::get('/translations/{n?}','TranslationsController@show');
 /* Create */
 Route::post('/translate','TranslateController@translate');
 
+/* Delete */
+Route::get('/translations/{n?}/delete', 'TranslationsController@delete');
+
 /* Practice */
 Route::any('/practice/{n?}', 'PracticeController@index');
 
