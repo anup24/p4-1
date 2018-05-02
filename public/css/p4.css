@@ -50,7 +50,7 @@ label, legend {
 }
 
 .entry {
-    margin: 15px 0px;
+    margin: 25px 0px;
 }
 
 .form-group {
@@ -71,12 +71,30 @@ label, legend {
     font-size: 1.2em;
 }
 
-td,th {
-    padding: 10px;
+.tableButton {
+    width: 10%;
+    font-weight: bold;
+    background-color: #0069d9;
+    color: white;
+    text-decoration: none;
 }
 
-td {
-    width: 50%;
+.tableButton a {
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.tableEntry {
+    width: 45%;
+}
+
+.tableButton:hover {
+    background-color: #9fcdff;
+}
+
+td,th {
+    padding: 10px;
 }
 
 h2 {

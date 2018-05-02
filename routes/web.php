@@ -4,7 +4,7 @@
 /* Get & Show */
 Route::get('/', 'TranslateController@index');
 Route::get('/translations','TranslationsController@index');
-Route::get('/translate/{n?}','TranslationsController@show');
+Route::get('/translations/{n?}','TranslationsController@show');
 
 /* Create */
 Route::post('/translate','TranslateController@translate');

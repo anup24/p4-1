@@ -11,7 +11,6 @@ use Debugbar;
 use App\Sourcelanguage;
 use App\Targetlanguage;
 use App\Translation;
-use Aws\Translate;
 
 class TranslationsController extends Controller
 {
@@ -19,20 +18,26 @@ class TranslationsController extends Controller
     {
         # Fetch all translations from the DB
         $translations = Translation::all();
-        $translations = array_reverse($translations->toArray());
 
-
-
-        dump($translations);
-
+        # Show all translations with edit/delete buttons
         return view('translations.index')->with([
-            'translations' => $translations
+            'translations' => $translations,
+            'enableButtons' => true
         ]);
     }
 
-    public function show($id = null)
+    public function show($id)
     {
-        // Show a particular translation
+        # Fetch entry from DB
+        $entry = Translation::where('id','=',$id)->first();
+        if(is_null($entry)) {
+            return abort(404);
+        }
+
+        return view('translations.show')-> with([
+            'entry' => $entry,
+            'enableButtons' => false
+        ]);
     }
 
 

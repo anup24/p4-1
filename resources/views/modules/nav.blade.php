@@ -7,6 +7,9 @@
                     <a class="nav-link" href="{{ env('APP_URL') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/translations">Translations <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ env('GITHUB_URL') }}" target='_blank'>GitHub</a>
                 </li>
             </ul>
