@@ -114,7 +114,8 @@ label, legend {
 }
 
 .table-badges ul {
-    margin-top: 10px;
+    margin: 10px 0px 0px 0px;
+    padding: 0px;
 }
 
 .tableButton {
