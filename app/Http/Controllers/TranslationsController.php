@@ -11,6 +11,7 @@ use Debugbar;
 use App\Sourcelanguage;
 use App\Targetlanguage;
 use App\Translation;
+use App\Tag;
 
 class TranslationsController extends Controller
 {
@@ -49,8 +50,8 @@ class TranslationsController extends Controller
 
     public function edit($id)
     {
-        # Fetch entry from DB
-        $entry = Translation::find($id);
+        # Fetch entry from DB and eager load tags
+        $entry = Translation::with('tags')->find($id);
 
         # Check if anything returned
         if (is_null($entry)) {
@@ -60,9 +61,21 @@ class TranslationsController extends Controller
             ]);
         }
 
-        return view('translations.show')->with([
+        # Fetch languages and tags to populate the selectors
+        $srcLang = Sourcelanguage::all();
+        $targetLang = Targetlanguage::all();
+        $tags = Tag::all();
+
+        # Convert entry tags to array
+        $tagArray = $entry->tags()->pluck('tags.id')->toArray();
+
+        return view('translations.edit')->with([
             'entry' => $entry,
-            'enableButtons' => false
+            'enableButtons' => false,
+            'srcLang' => $srcLang,
+            'targetLang' => $targetLang,
+            'tags' => $tags,
+            'tagArray' => $tagArray
         ]);
     }
 

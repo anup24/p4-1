@@ -18,7 +18,7 @@
     <form method='POST' action='/translations/{{ $entry['id'] }}'>
         {{ method_field('delete') }}
         {{ csrf_field() }}
-        <input type='submit' value='Yes, annihilate!' class='btn-danger btn-sm'>
+        <input type='submit' value='Yes, annihilate!' class='btn btn-danger btn-md'>
     </form>
 
     <p id='cancel'>

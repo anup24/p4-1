@@ -13,7 +13,7 @@
                 <option value='{{ $arr->short_name }}'>{{ $arr->name }}</option>
             @endforeach
         </select>
-        <label>Enter your text to be translated:
+        <label>Enter your text to be translated (required):
             <input type='text' name='translateText' class='form-control' id='translateText'
                    value='Test post please ignore.'></label>
         <div id='submit'>
