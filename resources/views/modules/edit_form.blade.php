@@ -23,14 +23,9 @@
         <label>Enter any attributes for this translation:</label>
         @foreach ($tags as $tag)
             <label>
-                <input
-                    type='checkbox'
-                    name='tags[]'
-                    value='{{$tag['id']}}'
-                    {{ in_array($tag['id'],$tagArray) ? 'checked' : '' }}
-                >   {{$tag['name']}}
+                <input type='checkbox' name='tags[]'
+                       value='{{$tag['id']}}' {{ in_array($tag['id'],$tagArray) ? 'checked' : '' }}> {{$tag['name']}}
             </label>
-
         @endforeach
         <div id='submit'>
             <input type='submit' value='Confirm Edit' class='btn btn-primary btn-md'>

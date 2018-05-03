@@ -81,7 +81,12 @@ class TranslationsController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        # TO DO:
+        # - Process edit form submission
+        # - Validate input
+        # - New AWS translation from request
+        # - Redirect to edit page on AWS error with alert
+        # - Save to DB and return to translations with alert if successful
     }
 
     public function delete($id)
