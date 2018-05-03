@@ -45,6 +45,30 @@ class TranslationsController extends Controller
         ]);
     }
 
+    public function edit($id)
+    {
+        # Fetch entry from DB
+        $entry = Translation::find($id);
+
+        # Check if anything returned
+        if (is_null($entry)) {
+            # Return to directory with alert message
+            return redirect('/translations')->with([
+                'alert' => 'The specified entry was not found.'
+            ]);
+        }
+
+        return view('translations.show')->with([
+            'entry' => $entry,
+            'enableButtons' => false
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+
+    }
+
     public function delete($id)
     {
         # Fetch entry from DB

@@ -16,7 +16,7 @@
     @if ($enableButtons)
         <div class='entry-buttons'>
             <ul>
-                <li><a href='/translations/{{ $entry['id'] }}'>Edit</a></li>
+                <li><a href='/translations/{{ $entry['id'] }}/edit'>Edit</a></li>
                 <li><a href='/translations/{{ $entry['id'] }}/delete'>Delete</a></li>
             </ul>
         </div>
