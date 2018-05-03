@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <h2>Translation #{{ $entry['id'] }}</h2>
+    <h2>Edit Translation #{{ $entry['id'] }}</h2>
 
     @include('modules.translation')
 
