@@ -14,8 +14,8 @@ class TagTranslationTableSeeder extends Seeder
     public function run()
     {
         $translations = [
-            1 => ['Verified Accurate', 'Flag as Inappropriate'],
-            2 => ['Flag as Inaccurate', 'Flag as Inappropriate']
+            1 => ['Verified Accurate', 'Flagged as Inappropriate'],
+            2 => ['Flagged as Inaccurate', 'Flagged as Inappropriate']
         ];
 
         foreach ($translations as $id => $tags) {

@@ -28,8 +28,8 @@ class TranslationsController extends Controller
 
     public function show($id)
     {
-        # Fetch entry from DB
-        $entry = Translation::find($id);
+        # Fetch entry from DB and eager load tags
+        $entry = Translation::with('tags')->find($id);
 
         # Check if anything returned
         if (is_null($entry)) {
@@ -38,6 +38,8 @@ class TranslationsController extends Controller
                 'alert' => 'The specified entry was not found.'
             ]);
         }
+
+        dump($entry);
 
         return view('translations.show')->with([
             'entry' => $entry,

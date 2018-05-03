@@ -13,6 +13,16 @@
             </td>
         </tr>
     </table>
+    @if ($entry['tags'])
+        <div class='table-badges'>
+            <ul>
+                @foreach ($entry['tags'] as $tag)
+                    <img src='{{$tag['image']}}' class='badge-image'>
+                    <li>{{ $tag['name'] }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @if ($enableButtons)
         <div class='entry-buttons'>
             <ul>

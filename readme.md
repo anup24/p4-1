@@ -3,7 +3,7 @@
 + Production URL: <https://p4.mcm223.me>
 
 ## Database
-*The following is example info taken from Foobooks; delete and replace with your own info.*
+*This application acts as a user interface for the Amazon Web Service's Translate service. Users enter the desired attributes in the form, and the translated results are saved to the database.*
 
 Primary tables:
   + `translations`
@@ -41,6 +41,7 @@ __Delete__
 ## Outside resources
 + Amazon Web Services PHP SDK
 + Debug Bar and IDE Helper
++ Badge icons are from icons8.com
 
 ## Code style divergences
 *List any divergences from PSR-1/PSR-2 and course guidelines on code style*

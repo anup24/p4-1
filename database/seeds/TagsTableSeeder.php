@@ -12,11 +12,16 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        $tags = ['Verified Accurate','Flag as Inaccurate','Flag as Inappropriate'];
+        $tags = [
+            ['Verified Accurate','images/verified.png'],
+            ['Flagged as Inaccurate','images/inaccurate.png'],
+            ['Flagged as Inappropriate','images/danger.png']
+        ];
 
         foreach($tags as $tagName){
             $tag = new Tag();
-            $tag->name = $tagName;
+            $tag->name = $tagName[0];
+            $tag->image = $tagName[1];
             $tag->save();
         }
     }

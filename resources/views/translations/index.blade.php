@@ -14,6 +14,7 @@
     @foreach ($translations as $entry)
         {{--Display results --}}
         @include('modules.translation')
+        <hr />
     @endforeach
 
 @endsection
