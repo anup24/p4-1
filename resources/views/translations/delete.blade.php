@@ -15,7 +15,7 @@
 
     @include('modules.translation')
 
-    <form method='POST' action='/translations/{{ $entry['id'] }}/delete'>
+    <form method='POST' action='/translations/{{ $entry['id'] }}'>
         {{ method_field('delete') }}
         {{ csrf_field() }}
         <input type='submit' value='Yes, annihilate!' class='btn-danger btn-sm'>
