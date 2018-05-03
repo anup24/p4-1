@@ -17,8 +17,7 @@
         <div class='table-badges'>
             <ul>
                 @foreach ($entry['tags'] as $tag)
-                    <img src='{{$tag['image']}}' class='badge-image'>
-                    <li>{{ $tag['name'] }}</li>
+                    <li><img src='{{$tag['image']}}' class='badge-image'> {{ $tag['name'] }}</li>
                 @endforeach
             </ul>
         </div>
