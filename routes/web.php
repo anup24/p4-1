@@ -11,6 +11,12 @@ Route::post('/translate','TranslateController@translate');
 
 /* Delete */
 Route::get('/translations/{n?}/delete', 'TranslationsController@delete');
+Route::delete('/translations/{n?}/delete', 'TranslationsController@destroy');
+
+
+/****
+ * Practice stuff below, not for final release
+ */
 
 /* Practice */
 Route::any('/practice/{n?}', 'PracticeController@index');

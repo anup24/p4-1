@@ -3,9 +3,6 @@
         <tr>
             <th>Input: {{ $entry->sourcelanguage->name }}</th>
             <th>Output: {{ $entry->targetlanguage->name }}</th>
-            @if ($enableButtons)
-                <th class='tableButton'><a href='/translations/{{$entry['id']}}'>Edit</a></th>
-            @endif
         </tr>
         <tr>
             <td class='tableEntry'>
@@ -14,11 +11,14 @@
             <td>
                 {{ $entry['output'] }}
             </td>
-            @if($enableButtons)
-                <td class='tableButton'>
-                    <a href='/translations/{{$entry['id']}}/delete'>Delete</a>
-                </td>
-            @endif
         </tr>
     </table>
+    @if ($enableButtons)
+        <div class='entry-buttons'>
+            <ul>
+                <li><a href='/translations/{{ $entry['id'] }}'>Edit</a></li>
+                <li><a href='/translations/{{ $entry['id'] }}/delete'>Delete</a></li>
+            </ul>
+        </div>
+    @endif
 </div>

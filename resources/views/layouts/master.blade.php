@@ -15,6 +15,13 @@
 </head>
 <body>
 
+@if(session('alert'))
+    <div class='flash-alert'>
+        {{ session('alert') }}
+    </div>
+@endif
+
+
 @include('modules.nav')
 
 <section id='container'>

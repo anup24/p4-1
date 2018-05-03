@@ -17,7 +17,7 @@ class TranslationsController extends Controller
     public function index()
     {
         # Fetch all translations from the DB
-        $translations = Translation::all();
+        $translations = Translation::orderBy('id', 'desc')->get();
 
         # Show all translations with edit/delete buttons
         return view('translations.index')->with([
@@ -33,7 +33,10 @@ class TranslationsController extends Controller
 
         # Check if anything returned
         if (is_null($entry)) {
-            return abort(404);
+            # Return to directory with alert message
+            return redirect('/translations')->with([
+                'alert' => 'The specified entry was not found.'
+            ]);
         }
 
         return view('translations.show')->with([
@@ -49,12 +52,32 @@ class TranslationsController extends Controller
 
         # Check if anything returned
         if (is_null($entry)) {
-            return abort(404);
+            # Return to directory with alert message
+            return redirect('/translations')->with([
+                'alert' => 'The specified entry was not found.'
+            ]);
         }
 
         return view('translations.delete')->with([
             'entry' => $entry,
             'enableButtons' => false
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        # Fetch entry from DB
+        $entry = Translation::find($id);
+
+        # Detach any associated tags
+        $entry->tags()->detach();
+
+        # Delete entry from DB
+        $entry->delete();
+
+        # Return to directory with alert message
+        return redirect('/translations')->with([
+            'alert' => 'Translation #' . $entry['id'] . ' was successfully deleted.'
         ]);
     }
 

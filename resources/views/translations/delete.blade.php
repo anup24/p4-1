@@ -15,10 +15,14 @@
 
     @include('modules.translation')
 
-    <div class='btn-danger' id='deleteEntry'>
-        Yes, Delete
-    </div>
+    <form method='POST' action='/translations/{{ $entry['id'] }}/delete'>
+        {{ method_field('delete') }}
+        {{ csrf_field() }}
+        <input type='submit' value='Yes, annihilate!' class='btn-danger btn-sm'>
+    </form>
 
-    <p>No, please <a href='/translations'>take me back home</a>.</p>
+    <p id='cancel'>
+        No, <a href='/translations'>take me back home</a>.
+    </p>
 
 @endsection

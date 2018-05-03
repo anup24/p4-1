@@ -19,7 +19,7 @@
 }
 
 #checkbox {
-    margin-left:22px;
+    margin-left: 22px;
 }
 
 img {
@@ -49,10 +49,6 @@ label, legend {
     margin-bottom: 30px;
 }
 
-.entry {
-    margin: 25px 0px;
-}
-
 .form-group {
     text-align: left;
     font-weight: bold;
@@ -64,8 +60,38 @@ label, legend {
     padding: 0px;
 }
 
-#deleteEntry {
-    width: 50px;
+#cancel {
+    margin-top: 25px;
+}
+
+.entry {
+    margin: 35px 0px 50px 0px;
+    display: block;
+}
+
+.entry-buttons {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0px 20px 0px;
+    font-weight: bold;
+}
+
+.entry-buttons ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.entry-buttons ul li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.flash-alert {
+    background-color: lawngreen;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .table-bordered {
@@ -76,7 +102,7 @@ label, legend {
 }
 
 .tableButton {
-    width: 10%;
+    width: 20%;
     font-weight: bold;
     background-color: #0069d9;
     color: white;
@@ -90,15 +116,19 @@ label, legend {
 }
 
 .tableEntry {
-    width: 45%;
+    width: 50%;
 }
 
 .tableButton:hover {
     background-color: #9fcdff;
 }
 
-td,th {
+td, th {
     padding: 10px;
+}
+
+th {
+    background-color: #f8f9fa;
 }
 
 h2 {
