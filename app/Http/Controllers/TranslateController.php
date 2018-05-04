@@ -30,9 +30,13 @@ class TranslateController extends Controller
     public function translate(Request $request)
     {
         # Validate text area input
+        $customMessage = [
+            'translateText.regex' => 'Only letters, numbers, and punctuation (e.g. periods and spaces) are allowed in input text.',
+            'translateText.max' => 'Please enter 150 characters or fewer.'
+        ];
         $validatedText = $request->validate([
-            'translateText' => array('required', 'max:50')
-        ]);
+            'translateText' => array('required', 'max:150', 'regex:/^[A-Za-z0-9_.,!()"\'\s]+$/')
+        ], $customMessage);
 
         # Create new AWS client
         $client = new Translate\TranslateClient([

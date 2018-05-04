@@ -13,4 +13,6 @@
 
     @include('modules.translation')
 
+    <p><a href='/translations'>See all translations</a></p>
+
 @endsection
