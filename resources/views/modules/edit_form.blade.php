@@ -40,6 +40,5 @@
                 Nevermind, <a href='/translations'>take me back home</a>.
             </p>
         </div>
-
     </div>
 </form>

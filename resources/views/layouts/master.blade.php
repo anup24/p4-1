@@ -21,7 +21,6 @@
     </div>
 @endif
 
-
 @include('modules.nav')
 
 <section id='container'>

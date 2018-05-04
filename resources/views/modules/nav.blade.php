@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ env('APP_URL') }}">@yield('title','Blind Date with a Book')</a>
+        <a class="navbar-brand" href="{{ env('APP_URL') }}">@yield('title','Babel')</a>
         <div id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">

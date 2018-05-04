@@ -3,7 +3,7 @@
 + Production URL: <https://p4.mcm223.me>
 
 ## Database
-*This application acts as a user interface for the Amazon Web Service's Translate service. Users enter the desired attributes in the form, and the translated results are saved to the database.*
+*This application uses the AWS Translate API to provide users with translations in several languages. Users enter the desired attributes in the form and the translated results are saved to the database.*
 
 Primary tables:
   + `translations`
@@ -16,22 +16,22 @@ Pivot table(s):
 
 
 ## CRUD
-*Describe what action I need take in order to see an example of all 4 CRUD operations in your app. I've filled this out with examples from the Foobooks app - delete this and replace with your own info. If one operation is performed multiple times (e.g. Read), you only need to provide 1 example.*
+*Users can create, view, edit, and delete translations within the app:*
 
 __Create__
   + Visit <https://p4.mcm223.me/>
-  + Fill out form with translation details
+  + Fill out form with translation details (starting language, ending language, and text to translate)
   + Click *Translate*
-  + Land on either successful landing page or error page
+  + Land on either successful landing page or an error. If it's a validation error, you will see the validation message. If the AWS service failed, you will see the failure code details.
   
 __Read__
-  + Visit <https://p4.mcm223.me/translations> see a listing of all past translations
+  + Visit <https://p4.mcm223.me/translations> to see a listing of all past translations
   
 __Update__
   + Visit <https://p4.mcm223.me/translations> and click edit on an entry
-  + Make some edit to form
-  + Click *Save*
-  + Land on the translations page with updated entry
+  + Make some edit to the translation, including adding any desired tags. This will make another call to the AWS API to re-translate the new input.
+  + Click *Confirm Edit*
+  + Land on the edit page with updated entry or corresponding error
   
 __Delete__
   + Visit <http://p4.mcm223.me/translations> and click the delete button next on an entry
@@ -39,12 +39,11 @@ __Delete__
   + Observe confirmation message
 
 ## Outside resources
-+ Amazon Web Services PHP SDK
-+ Debug Bar and IDE Helper
-+ Badge icons are from icons8.com
++ [Amazon Web Service PHP SDK](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html)
++ [Debug Bar](https://github.com/barryvdh/laravel-debugbar) and [IDE Helper](https://github.com/barryvdh/laravel-ide-helper)
++ Badge icons are from [icons8.com](https://icons8.com/)
 
 ## Code style divergences
-*List any divergences from PSR-1/PSR-2 and course guidelines on code style*
 
-## Notes for instructor
-*Any notes for me to refer to while grading; if none, omit this section*
+
+## Notes for instructor 
