@@ -5,10 +5,10 @@
             <th>Output: {{ $entry->targetlanguage->name }}</th>
         </tr>
         <tr>
-            <td class='tableEntry'>
+            <td class='table-entry'>
                 {{ $entry['input'] }}
             </td>
-            <td>
+            <td class='table-entry'>
                 {{ $entry['output'] }}
             </td>
         </tr>
