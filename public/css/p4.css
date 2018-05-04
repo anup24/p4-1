@@ -133,16 +133,13 @@ label, legend {
     text-decoration: none;
 }
 
-.table-entry {
-    width: 50%;
-}
-
 .tableButton:hover {
     background-color: #9fcdff;
 }
 
 td, th {
     padding: 10px;
+    width: 50%;
 }
 
 th {
