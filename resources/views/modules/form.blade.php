@@ -4,13 +4,13 @@
         <label for='sourceLanguage'>Choose your starting language:</label>
         <select name='sourceLanguage' id='sourceLanguage' class='form-control'>
             @foreach ($srcLang as $lang => $arr)
-                <option value='{{ $arr->short_name }}'>{{ $arr->name }}</option>
+                <option value='{{ $arr->short_name }}'{{ ($arr->short_name == old('sourceLanguage')) ? ' selected' : '' }}>{{ $arr->name }}</option>
             @endforeach
         </select>
         <label for='targetLanguage'>Choose your ending language:</label>
         <select name='targetLanguage' id='targetLanguage' class='form-control'>
             @foreach ($targetLang as $lang => $arr)
-                <option value='{{ $arr->short_name }}'>{{ $arr->name }}</option>
+                <option value='{{ $arr->short_name }}'{{ ($arr->short_name == old('targetLanguage')) ? ' selected' : '' }}>{{ $arr->name }}</option>
             @endforeach
         </select>
         <label>Enter your text to be translated (required, 150 characters maximum):
