@@ -12,6 +12,7 @@ use App\Sourcelanguage;
 use App\Targetlanguage;
 use App\Translation;
 use App\Tag;
+use Aws\Translate;
 
 class TranslationsController extends Controller
 {
@@ -40,11 +41,9 @@ class TranslationsController extends Controller
             ]);
         }
 
-        dump($entry);
-
         return view('translations.show')->with([
             'entry' => $entry,
-            'enableButtons' => false
+            'enableButtons' => true
         ]);
     }
 
@@ -87,6 +86,66 @@ class TranslationsController extends Controller
         # - New AWS translation from request
         # - Redirect to edit page on AWS error with alert
         # - Save to DB and return to translations with alert if successful
+
+        # Validate text area input
+        $validatedText = $request->validate([
+            'translateText' => array('required', 'max:50')
+        ]);
+
+        # Create new AWS client
+        $client = new Translate\TranslateClient([
+            'version' => 'latest',
+            'region' => env('AWS_REGION'),
+            'credentials' => [
+                'key' => env('AWS_ACCESS_KEY_ID'),
+                'secret' => env('AWS_SECRET_ACCESS_KEY')
+            ]
+        ]);
+
+        # Attempt to fetch translation from form request input
+        try {
+            # Make call to AWS Translate
+            $result = $client->translateText([
+                'SourceLanguageCode' => $request->input('sourceLanguage', 'en'),
+                'TargetLanguageCode' => $request->input('targetLanguage', 'es'),
+                'Text' => $validatedText['translateText']
+            ]);
+
+            # Get language objects to associate with the new translation DB entry
+            $srcLangID = Sourcelanguage::where('short_name', '=', $result['SourceLanguageCode'])->first();
+            $tarLangID = Targetlanguage::where('short_name', '=', $result['TargetLanguageCode'])->first();
+
+            # Save result to database upon successful call
+            $translation = Translation::find($id);
+            $translation->input = $validatedText['translateText'];
+            $translation->output = $result['TranslatedText'];
+
+            # Associate source and target language foreign keys
+            $translation->sourceLanguage()->associate($srcLangID);
+            $translation->targetLanguage()->associate($tarLangID);
+
+            # Sync tags
+            $translation->tags()->sync($request->input('tags'));
+
+            # Update the DB entry
+            $translation->save();
+
+            # Land on the newly saved translation detail page
+            return redirect('/translations/' . $id . '/edit')->with([
+                'alert' => 'Changes to translation #' . $id . ' saved successfully.'
+            ]);
+
+        } catch (AwsException $e) {
+            $result = [
+                'errorCode' => $e->getAwsErrorCode(),
+                'errorMessage' => $e->getAwsErrorMessage()
+            ];
+
+            # Land back on edit page with error alert
+            return redirect('/translations/' . $id . '/edit')->with([
+                'alert' => 'Error: ' . $result['errorCode'] . '. Please correct and try again.'
+            ]);
+        }
     }
 
     public function delete($id)
@@ -124,35 +183,4 @@ class TranslationsController extends Controller
             'alert' => 'Translation #' . $entry['id'] . ' was successfully deleted.'
         ]);
     }
-
-
-    /**
-     * ANY (GET/POST/PUT/DELETE)
-     * /practice/{n?}
-     * This method accepts all requests to /practice/ and
-     * invokes the appropriate method.
-     * http://foobooks.loc/practice => Shows a listing of all practice routes
-     * http://foobooks.loc/practice/1 => Invokes practice1
-     * http://foobooks.loc/practice/5 => Invokes practice5
-     * http://foobooks.loc/practice/999 => 404 not found
-     *
-     * public function index($n = null)
-     * {
-     * $methods = [];
-     *
-     * # If no specific practice is specified, show index of all available methods
-     * if (is_null($n)) {
-     * foreach (get_class_methods($this) as $method) {
-     * if (strstr($method, 'practice')) {
-     * $methods[] = $method;
-     * }
-     * }
-     * return view('practice')->with(['methods' => $methods]);
-     * } # Otherwise, load the requested method
-     * else {
-     * $method = 'practice' . $n;
-     * return (method_exists($this, $method)) ? $this->$method() : abort(404);
-     * }
-     * }
-     * */
 }
