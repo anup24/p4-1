@@ -136,14 +136,16 @@ label, legend {
 .tableButton:hover {
     background-color: #9fcdff;
 }
-
-td, th {
-    padding: 10px;
+td {
     width: 50%;
 }
 
 th {
     background-color: #f8f9fa;
+}
+
+td, th {
+    padding: 10px;
 }
 
 h2 {
