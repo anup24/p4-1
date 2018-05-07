@@ -42,6 +42,7 @@ __Delete__
 + [Amazon Web Service PHP SDK](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html)
 + [Debug Bar](https://github.com/barryvdh/laravel-debugbar) and [IDE Helper](https://github.com/barryvdh/laravel-ide-helper)
 + Badge icons are from [icons8.com](https://icons8.com/)
++ TLS Certificate from [Let's Encrypt](https://letsencrypt.org/)
 
 ## Code style divergences
 
