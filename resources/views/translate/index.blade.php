@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h2>Babel: Translation Service</h2>
+    <h2>{{ env('APP_NAME') }}: Translation Service</h2>
     <div id='intro'>
         <p>Use the form below to translate text into the language of your choosing. You can either specify a
             starting language, or let the system auto-detect what language you enter. Supported language combinations
