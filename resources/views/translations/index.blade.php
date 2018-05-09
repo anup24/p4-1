@@ -1,9 +1,5 @@
 @extends('layouts.master')
 
-@push('head')
-
-@endpush
-
 @section('title')
     {{ env('APP_NAME') }}
 @endsection

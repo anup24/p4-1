@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use Aws\Exception\AwsException;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Config;
 use App;
-use Debugbar;
 use App\Sourcelanguage;
 use App\Targetlanguage;
 use App\Translation;
 use App\Tag;
-use Aws\Translate;
+
 
 class TranslationsController extends Controller
 {
@@ -89,24 +86,17 @@ class TranslationsController extends Controller
             'translateText' => array('required', 'max:150', 'regex:/^[A-Za-z0-9_.,!?;()"\'\s\-]+$/')
         ], $customMessage);
 
-        # Create new AWS client
-        $client = new Translate\TranslateClient([
-            'version' => 'latest',
-            'region' => env('AWS_REGION'),
-            'credentials' => [
-                'key' => env('AWS_ACCESS_KEY_ID'),
-                'secret' => env('AWS_SECRET_ACCESS_KEY')
-            ]
-        ]);
-
         # Attempt to fetch translation from form request input
         try {
+            # New Translation object
+            $new_translation = new Translation();
+
             # Make call to AWS Translate
-            $result = $client->translateText([
-                'SourceLanguageCode' => $request->input('sourceLanguage', 'en'),
-                'TargetLanguageCode' => $request->input('targetLanguage', 'es'),
-                'Text' => $validatedText['translateText']
-            ]);
+            $result = $new_translation->getTranslation(
+                $request->input('sourceLanguage', 'en'),
+                $request->input('targetLanguage', 'es'),
+                $validatedText['translateText']
+            );
 
             # Get language objects to associate with the new translation DB entry
             $srcLangID = Sourcelanguage::where('short_name', '=', $result['SourceLanguageCode'])->first();

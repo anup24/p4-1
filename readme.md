@@ -44,7 +44,5 @@ __Delete__
 + Badge icons are from [icons8.com](https://icons8.com/)
 + TLS Certificate from [Let's Encrypt](https://letsencrypt.org/)
 
-## Code style divergences
-
-
 ## Notes for instructor 
+Thanks for a great semester! I learned a ton and really enjoyed the subject matter.
